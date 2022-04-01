@@ -26,21 +26,23 @@ void MinosGame::start() {
 
 
 void MinosGame::createLabyrinth() {
+    srand(time(NULL));
     while (wallsToPlace != 0) {
         view->printBoard();
         int x = rand() % model->getBoardSize();
-        int y = rand() % model->getBoardSize();
-        Position position = Position(x, y) * 2;
+        int y = rand() % (model->getBoardSize());
+        Position position = Position(x, y);
         std::string direction = std::string(1, DIRECTION[rand() % 2]);
-        std::cout << x << y << std::endl;
-        std::cout << direction << std::endl;
-        if (model->checkWall(direction, position)) {
-            model->placeWall(direction, position);
-            wallsToPlace --;
-            placedWallsDirections.push(direction);
-            placedWalls.push(position);
-            std::cout << "Mur placé" << std::endl;
+        if (0 <= position.getX() && position.getX() < 17 && 0 < position.getY() && position.getY() < 17) {
+            if (model->checkWall(direction, position)) {
+                model->placeWall(direction, position);
+                wallsToPlace --;
+                placedWallsDirections.push(direction);
+                placedWalls.push(position);
+                std::cout << "Mur placé" << std::endl;
+            }
         }
+        std::cout << "ok " << std::endl;
     }
 }
 
