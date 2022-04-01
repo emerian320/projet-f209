@@ -136,6 +136,22 @@ void ClientNC::runGame(string pseudo, string mdp, string ip, int port) {
   close(this->socket); //eccessible seulement quand le client se ferme
 }
 
+void ClientGUI::manageSocketTraffic(){
+  while (true) {
+    message_t msg;
+    size_t nbytes = receive(this->socket, &msg);
+    if (nbytes <= 0) {
+      exit(0);
+    }
+    if (msg.message.substr(0,1) == (string)"["){ //un message commencant par "[" est un message d'utilisateur
+      //Envoie le message dans le chatroom
+    }
+    else{
+      //envoie le plateau transformer en matrice a boardGUI
+    }
+    std::cout<<msg.message<<std::endl; 
+  }
+}
 
 int main(int argc, char *argv[]) {
   if (argc < 4) {

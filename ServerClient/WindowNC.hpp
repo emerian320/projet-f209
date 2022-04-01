@@ -77,8 +77,9 @@ public:
     virtual ~WindowGUI() {delete window; }
     void fetchInput(char &buffer) override {}; 
     
-    void getMenuWindow() {
-        window = new MenuWindow(); 
+    MenuWindow *getWindow() {return window; }
+    void getMenuWindow(ClientGUI *client) {
+        window = new MenuWindow(client); 
         window->show();
         return; 
    }
